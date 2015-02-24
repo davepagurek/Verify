@@ -35,6 +35,22 @@ v.test("Test with outside variable", new vector<Test> ({
 }));
 ```
 
+If you are expecting output with newlines in it, you can use a C++0x multiline string to create the expected output.
+```C++
+v.test("Test with outside variable", new vector<Test> ({
+       { "Print with newlines",
+R"(A
+B
+C
+D
+E
+F
+G
+)",
+    []{ lettersOnNewLines(); }}
+}));
+```
+
 When compiling, <strong>add the `-std=c++0x` compiler flag</strong> so that lambda functions can be used.
 
 
