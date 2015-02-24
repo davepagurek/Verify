@@ -2,7 +2,9 @@
 Unit testing for C++
 
 ## Usage
-Create tests in your `main()`:
+Add the `-std=c++0x` compiler flag so that lambda functions can be used.
+
+Then, create tests in your `main()`:
 
 ```C++
 #include <vector>
