@@ -29,8 +29,12 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++0x" />
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Verify.cpp" />
+		<Unit filename="Verify.h" />
+		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

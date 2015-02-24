@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1424791265 source:c:\users\dave_000\documents\github\verify\main.cpp
+1424792251 source:c:\users\dave_000\documents\github\verify\main.cpp
 	<vector>
 	<string>
 	<iostream>
 	"Verify.h"
 
-1424791269 c:\users\dave_000\documents\github\verify\verify.h
+1424793249 c:\users\dave_000\documents\github\verify\verify.h
 	<iostream>
 	<string>
 	<map>
@@ -13,4 +13,9 @@
 	<vector>
 	<functional>
 	<string>
+	<ostream>
+
+1424792224 source:c:\users\dave_000\documents\github\verify\verify.cpp
+	"Verify.h"
+	<iomanip>
 

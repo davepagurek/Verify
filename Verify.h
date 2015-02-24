@@ -8,11 +8,13 @@
 #include <vector>
 #include <functional>
 #include <string>
+#include <ostream>
+
 
 struct Test {
     std::string name;
     std::string expected;
-    std::function<void()> tester;
+    std::function<void()> routine;
 };
 
 struct TestGroup {

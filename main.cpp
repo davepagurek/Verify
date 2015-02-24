@@ -14,6 +14,9 @@ int main() {
            },
            {
                "length", "4", [&s]{ cout << s.length(); }
+           },
+           {
+               "fail", "5", [&s]{ cout << s.length(); }
            }
     }));
 
