@@ -10,6 +10,7 @@
 #include <string>
 #include <ostream>
 #include <iomanip>
+#include <exception>
 
 
 
@@ -61,28 +62,48 @@ void Verify::run() {
     for (std::vector<TestGroup>::iterator group = groups.begin(); group < groups.end(); group++) {
         std::cerr << group->name << std::endl;
 
-        for (int i=0; i<55; i++) std::cerr << char(205);
+        //Find longest string
+        int longest = 0;
+        for (std::vector<Test>::iterator test = group->tests.begin(); test < group->tests.end(); test++) {
+            if (test->name.length()>longest) longest = test->name.length();
+        }
+
+
+        for (int i=0; i<longest+30; i++) std::cerr << char(205);
         std::cerr << std::endl;
 
         int passed = 0;
         for (std::vector<Test>::iterator test = group->tests.begin(); test < group->tests.end(); test++) {
-            std::cerr << std::setw(30) << std::left << test->name;
-            test->routine();
-            std::string actual = readBuf();
-            if (test->expected == actual) {
+            std::cerr << std::setw(longest+5) << std::left << test->name;
+
+            std::string actual;
+            std::string exc;
+            bool excepted = false;
+            try {
+                test->routine();
+                actual = readBuf();
+            } catch (std::exception* e) {
+                excepted = true;
+                exc = e->what();
+            }
+            if (!excepted && test->expected == actual) {
                 std::cerr << "Passed" << std::endl;
                 passed++;
             } else {
                 std::cerr << "Failed" << std::endl;
-                std::cerr << std::setw(30) << " " << " --- Expected:  " << test->expected << std::endl;
-                std::cerr << std::setw(30) << " " << " --- Got:       " << actual << std::endl;
+                std::cerr << std::setw(longest+5) << " " << " --- Expected:  " << test->expected << std::endl;
+                if (excepted) {
+                    std::cerr << std::setw(longest+5) << " " << " --- Exception: " << exc << std::endl;
+                } else {
+                    std::cerr << std::setw(longest+5) << " " << " --- Got:       " << actual << std::endl;
+                }
             }
         }
 
-        for (int i=0; i<55; i++) std::cerr << char(196);
+        for (int i=0; i<longest+30; i++) std::cerr << char(196);
         std::cerr << std::endl;
 
-        std::cerr << std::setw(30) << " " << "Passed " << passed << "/" << group->tests.size() << " tests";
+        std::cerr << std::setw(longest+5) << " " << "Passed " << passed << "/" << group->tests.size() << " tests";
         std::cerr << std::endl << std::endl;
 
         if (passed < group->tests.size()) errors++;

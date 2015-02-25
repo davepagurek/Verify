@@ -17,6 +17,9 @@ int main() {
            },
            {
                "length (should fail)", "5", [&s]{ cout << s.length(); }
+           },
+           {
+               "Exception thrown (should fail)", "1", []{ throw new exception; }
            }
     }));
 
